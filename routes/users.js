@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 // add new user
 router.post('/new', (req, res, next) => {
 	
-	// const user = new User(req.body);  //postman bilan ishlash uchun
+	//const user = new User(req.body);  //postman bilan ishlash uchun
 
 	const music = new Music();
     music.content = req.body.content;
@@ -22,9 +22,24 @@ router.post('/new', (req, res, next) => {
 
 	user.save((err,data) => {
 		if (err){
-			return res.json(err);
+			res.json(err);
 		} else{
 			res.json(data);
+		}
+	});
+
+});
+
+// seach all
+router.get('/search', (req, res, next) => {
+
+	const promise = User.find({ });
+
+	promise.then((err, user) => {
+		if (err) {
+			res.json(err)
+		} else {
+			res.json(user);
 		}
 	});
 
